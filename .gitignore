@@ -1,0 +1,22 @@
+# Compiled binaries
+/bin/
+/sitesync-server
+/opsctl
+*.exe
+
+# Go test / coverage artifacts
+*.test
+*.out
+coverage.txt
+coverage/
+
+# Local runtime data (SQLite db, WAL/SHM files)
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# Editor / OS files
+.idea/
+.vscode/
+.DS_Store
