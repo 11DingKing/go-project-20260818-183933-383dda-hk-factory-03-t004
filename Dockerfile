@@ -7,10 +7,12 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /out/sitesync-server ./cmd/server && \
     CGO_ENABLED=0 go build -o /out/opsctl ./cmd/opsctl
 
-FROM gcr.io/distroless/static-debian12:nonroot
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=build /out/sitesync-server /app/sitesync-server
 COPY --from=build /out/opsctl /app/opsctl
 EXPOSE 48557
-USER nonroot:nonroot
+USER 65532:65532
 ENTRYPOINT ["/app/sitesync-server"]
